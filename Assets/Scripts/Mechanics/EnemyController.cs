@@ -14,7 +14,9 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
-
+        
+        
+        internal AnimationController animationController;
         internal PatrolPath.Mover mover;
         internal AnimationController control;
         internal Collider2D _collider;
@@ -32,6 +34,7 @@ namespace Platformer.Mechanics
             _collider = GetComponent<Collider2D>();
             _audio = GetComponent<AudioSource>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            animationController = GetComponent<AnimationController>();
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -39,6 +42,8 @@ namespace Platformer.Mechanics
             var player = collision.gameObject.GetComponent<PlayerController>();
             if (player != null)
             {
+                animationController.gravityModifier = 1;
+                appleBullet = false;
                 var ev = Schedule<PlayerEnemyCollision>();
                 ev.player = player;
                 ev.enemy = this;
