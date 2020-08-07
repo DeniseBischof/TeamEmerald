@@ -21,6 +21,9 @@ namespace Platformer.Mechanics
         internal AudioSource _audio;
         SpriteRenderer spriteRenderer;
 
+        public bool appleBullet;
+        public float bulletSpeed = 1;
+
         public Bounds Bounds => _collider.bounds;
 
         void Awake()
@@ -48,6 +51,11 @@ namespace Platformer.Mechanics
             {
                 if (mover == null) mover = path.CreateMover(control.maxSpeed * 0.5f);
                 control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+            }
+
+            if (appleBullet)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime, Space.World);
             }
         }
 
