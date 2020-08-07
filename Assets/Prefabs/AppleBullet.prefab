@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   ouch: {fileID: 8300000, guid: b7f741588644cd64bbee6387cb54a96d, type: 3}
+  enemyLifes: 1
   appleBullet: 1
   bulletSpeed: 1
 --- !u!70 &8720426707136611436
