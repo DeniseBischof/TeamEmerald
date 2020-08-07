@@ -14,6 +14,8 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
+
+        public float enemyLifes = 1;
         
         
         internal AnimationController animationController;
@@ -42,11 +44,16 @@ namespace Platformer.Mechanics
             var player = collision.gameObject.GetComponent<PlayerController>();
             if (player != null)
             {
-                animationController.gravityModifier = 1;
-                appleBullet = false;
-                var ev = Schedule<PlayerEnemyCollision>();
-                ev.player = player;
-                ev.enemy = this;
+                enemyLifes = enemyLifes - 1;
+
+                if (enemyLifes <= 0)
+                {
+                    animationController.gravityModifier = 1;
+                    appleBullet = false;
+                    var ev = Schedule<PlayerEnemyCollision>();
+                    ev.player = player;
+                    ev.enemy = this;
+                }
             }
         }
 
